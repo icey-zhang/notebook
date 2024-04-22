@@ -156,7 +156,7 @@ Mamba可以在RNN模式下进行非常非常快速的训练。
 
 为了让Mamba变得实用，它需要更快。这让Mamba的作者看到了Dao之前关于FlashAttention的工作，从而解决了问题。
 
-由于篇幅所限，在此我们省略了原文中FlashAttention的原理介绍部分（Review: FlashAttention），感兴趣的朋友可以查看原博/FlashAttention原论文，或者我们之前的一篇原理介绍文章。
+由于篇幅所限，在此我们省略了原文中FlashAttention的原理介绍部分（Review: FlashAttention），感兴趣的朋友可以查看原博/FlashAttention原论文，或者我们之前的一篇[原理介绍文章](https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzIzNjc1NzUzMw%3D%3D%26mid%3D2247686895%26idx%3D3%26sn%3D18e1c3fd5db81cf3c4a72c223b6344f6%26chksm%3De8dead9ddfa9248b30ed2f3f961659ff84c1e7d47aa35a5fa78e9c5c8f28fc61269935c47fc3%26scene%3D21%23wechat_redirect)。
 
 Back to Mamba
 还是基于上一张对比图。
