@@ -10,3 +10,5 @@ vi configs/base/models/faster_rcnn_r50_fpn.py ,打开配置文件；
 score_thr=0.3
 ```
 https://blog.csdn.net/qq_36810398/article/details/116994577
+上面那个方法没有用
+https://blog.csdn.net/qq_38018994/article/details/122320888
