@@ -188,3 +188,5 @@ Mamba作者在涉及语言、基因组学和音频的许多序列建模任务上
 如上图所示，结果看起来非常有希望。与其他类似尺寸的模型相比，Mamba似乎是最擅长建模语言的。
 
 https://zhuanlan.zhihu.com/p/683978639
+
+https://blog.csdn.net/v_JULY_v/article/details/134923301
