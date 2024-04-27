@@ -211,18 +211,18 @@ mamba(其对应论文为：Mamba: Linear-Time Sequence Modeling with Selective S
 #### 3.1.1 选择性状态空间模型：从S4到S6
 作者认为，序列建模的一个基础问题是把上下文压缩成更小的状态(We argue that a fundamental problem of sequence modeling is compressing context into a smaller state)，从这个角度来看
 
-> transformer的注意力机制虽然有效果但效率不算很高，毕竟其需要显式地存储整个上下文(storing the entire context，也就是KV缓存)，直接导致训练和推理消耗算力大
+- transformer的注意力机制虽然有效果但效率不算很高，毕竟其需要显式地存储整个上下文(storing the entire context，也就是KV缓存)，直接导致训练和推理消耗算力大
 好比，Transformer就像人类每写一个字之前，都把前面的所有字+输入都复习一遍，所以写的慢
-> RNN的推理和训练效率高，但性能容易受到对上下文压缩程度的限制
+- RNN的推理和训练效率高，但性能容易受到对上下文压缩程度的限制
 On the other hand, recurrent models are efficient because they have a finite state, implying constant-time inference and linear-time training. However, their effectiveness is limited by how well this state has compressed the context.
 
 好比，RNN每次只参考前面固定的字数(仔细体会这句话：When generating the output, the RNN only needs to consider the previous hidden state and current input. It prevents recalculating all previous hidden states which is what a Transformer would do)，写的快是快，但容易忘掉更前面的内容
 
-> 而SSM的问题在于其中的矩阵A B C不随输入不同而不同，即无法针对不同的输入针对性的推理，详见上文的2.4节
+- 而SSM的问题在于其中的矩阵A B C不随输入不同而不同，即无法针对不同的输入针对性的推理，详见上文的2.4节
 
 ![image](https://github.com/icey-zhang/notebook/assets/54712081/13c84216-0b2c-43f6-8a75-3fc56470d9cb)
 
-最终，Mamba的解决办法是，相比SSM压缩所有历史记录，mamba设计了一个简单的选择机制，通过“参数化SSM的输入”，让模型对信息有选择性处理，以便关注或忽略特定的输入
+- 最终，Mamba的解决办法是，相比SSM压缩所有历史记录，mamba设计了一个简单的选择机制，通过“参数化SSM的输入”，让模型对信息有选择性处理，以便关注或忽略特定的输入
 这样一来，模型能够过滤掉与问题无关的信息，并且可以长期记住与问题相关的信息
 好比，Mamba每次参考前面所有内容的一个概括，越往后写对前面内容概括得越狠，丢掉细节、保留大意
 
@@ -231,8 +231,9 @@ On the other hand, recurrent models are efficient because they have a finite sta
 
 总之，序列模型的效率与效果的权衡点在于它们对状态的压缩程度：
 
-高效的模型必须有一个小的状态(比如RNN或S4)
-而有效的模型必须有一个包含来自上下文的所有必要信息的状态(比如transformer)
+- 高效的模型必须有一个小的状态(比如RNN或S4)
+- 而有效的模型必须有一个包含来自上下文的所有必要信息的状态(比如transformer)
+
 而mamba为了兼顾效率和效果，选择性的关注必须关注的、过滤掉可以忽略的
 
 ![image](https://github.com/icey-zhang/notebook/assets/54712081/5beeed44-c4de-4d7b-b7b1-56ec28e4c72b)
@@ -248,26 +249,16 @@ On the other hand, recurrent models are efficient because they have a finite sta
 ![image](https://github.com/icey-zhang/notebook/assets/54712081/ee230256-71cd-457b-b256-42baa722c8b0)
 
 
-第一阶段(1a 1b)，通常采用固定公式和，将“连续参数”转化为“离散参数”，其中称为离散化规则，且可以使用多种规则来实现这一转换
-The first stage transforms the “continuous parameters” (∆, A, B) to “discrete parameters” (A, B) through fixed formulas A = 𝑓𝐴(∆, A) and B = 𝑓𝐵(∆, A, B), where the pair (𝑓𝐴, 𝑓𝐵) is called a discretization rule
+![image](https://github.com/icey-zhang/notebook/assets/54712081/d2e1dc0e-d8c3-4e94-8b98-ce259a87ecfe)
 
-例如下述方程中定义的零阶保持(ZOH)
-Various rules can be used such as the zero-order hold (ZOH) defined in equation (4).
-
-第二阶段(2a 2b，和3a 3b)，在参数由变换为后，模型可以用两种方式计算，即线性递归(2)或全局卷积(3)
-After the parameters have been transformed from (∆, A, B, C) ↦ (A, B, C), the model can be computed in two ways, either as a linear recurrence (2) or a global convolution (3)
-
-如之前所说的
-  模型通常使用卷积模式(3)可以进行高效的并行化训练「 其中整个输入序列提前看到，为何可以做高效的并行化呢，因为该模式能够绕过状态计算，并实现仅包含(B, L, D)的卷积核(3a)，即Thus the more efficient convolution mode wasintroduced which could bypass the state computation and materializes a convolution kernel (3a) of only (𝙱, 𝙻, 𝙳)」
-  并切换到循环模式(2)以高效的自回归推理(其中输入每次只看到一个时间步)
-the model uses the convolutional mode (3) for efficient parallelizable training (where the whole input sequence is seen ahead of time), and switched into recurrent mode (2) for efficient autoregressive inference (wheret he inputs are seen one timestep at a time
 
 ##### 3.1.1.2 S4中三个矩阵的维度表示、维度变化
-其次，再回顾一下，通过之前的讲解，可知矩阵都可以由个数字表示(the A∈ℝ𝑁×𝑁, B∈ℝ𝑁×1 , C ∈ ℝ1×𝑁 matrices can all be represented by 𝑁 numbers.)
+![image](https://github.com/icey-zhang/notebook/assets/54712081/23865dee-f867-4141-b845-ec03d68af06b)
+
 
 ![image](https://github.com/icey-zhang/notebook/assets/54712081/e417e85f-ec66-4e84-8c07-abadd528442e)
 
-1.但为了对批量大小为B、长度为L(注意，N <<L，比如类似上文举的例子中，N = 64 L=10000)、具有D个通道(虽然在之前的示例中，每个token的维度设定的1，比如拿 一个 64 × 64维的矩阵A 去记 10000 × 1维的数字，但实际上，经常会遇到一个token不止一个维度的，比如颜色便有R G B三个通道，即embedding的dimension是D )的输入序列进行操作「总之，则是输入和输出，和 Transformer 里面一样, 他们的大小是 (batch size B x sequence length L x embedding dim D)」
+1.但为了对批量大小为B、长度为L(注意，N <<L，比如类似上文举的例子中，N = 64 L=10000)、具有D个通道(虽然在之前的示例中，每个token的维度设定的1，比如拿 一个 64 × 64维的矩阵A 去记 10000 × 1维的数字，但实际上，经常会遇到一个token不止一个维度的，比如颜色便有R G B三个通道，即embedding的dimension是D )的输入序列x进行操作「总之，x,y则是输入和输出，和 Transformer 里面一样, 他们的大小是 (batch size B x sequence length L x embedding dim D)」
 
 ![image](https://github.com/icey-zhang/notebook/assets/54712081/ee803c22-28b7-478a-b777-cd952fb631b2)
 
@@ -295,19 +286,11 @@ Mamba 的处理方式是，给这 D 个 dimension的每个 dimension 都搞一�
 
 ![image](https://github.com/icey-zhang/notebook/assets/54712081/c71fd8d3-e0ac-4e8c-b859-fa5c4d9aacd7)
 
-  且的大小由原来的D变成了(B,L,D)，意味着对于一个 batch 里的 每个 token (总共有 BxL 个)都有一个独特的
+\rightarrow 且的大小由原来的D变成了(B,L,D)，意味着对于一个 batch 里的 每个 token (总共有 BxL 个)都有一个独特的
 且每个位置的矩阵、矩阵、都不相同，这意味着对于每个输入token，现在都有独特不同的矩阵、矩阵，可以解决内容感知问题
 
 2.维度上的变化具体执行时是怎么实现的呢？好办，通过
 
-![image](https://github.com/icey-zhang/notebook/assets/54712081/b59f85d7-aa4d-4912-813c-ac0885f5771f)
+![image](https://github.com/icey-zhang/notebook/assets/54712081/b120a893-faf3-4e83-8def-d3abb2bad8fb)
 
-来逐一将B, C, ∆变成输入数据依赖化(data dependent)
-
-其中对于矩阵B、C的代表把维的输入向量经过一个线性层映射到维，有点类似从之前的64 × 3(N × D)变成10000 × 64(L × N)，不过 读到此处的你，可曾想为何不是变成10000 × 64 × 3(L × N × D)呢？
-一个可能的原因是，而和都有这个维度，也就是说最终也会具备这个维度
-虽然没有变成data dependent，但是通过SSM的离散化操作之后，会经过outer product变成(B, L, N, D)的data dependent张量，算是以一种parameter efficient的方式来达到data dependent的目的
-且换个角度看，离散化之后， 的“输入数据依赖性”能够让整体的与输入相关
-
-当然，到底效果变好的最大原因是哪一块，可以参考这篇做下相关的实验：Gated Linear Attention Transformers with Hardware-Efficient Training
 
