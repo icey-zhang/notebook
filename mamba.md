@@ -200,11 +200,14 @@ mamba(其对应论文为：Mamba: Linear-Time Sequence Modeling with Selective S
 与先前的研究相比，Mamba主要有三点创新：
 
 **1.对输入信息有选择性处理(Selection Mechanism)**
+
 **2.硬件感知的算法(Hardware-aware Algorithm)**
 该算法采用“并行扫描算法”而非“卷积”来进行模型的循环计算(使得不用CNN也能并行训练)，但为了减少GPU内存层次结构中不同级别之间的IO访问，它没有具体化扩展状态
 当然，这点也是受到了S5(Simplified State Space Layers for Sequence Modeling)的启发
+
 **3.更简单的架构**
 将SSM架构的设计与transformer的MLP块合并为一个块(combining the design of prior SSM architectures with the MLP block of Transformers into a single block)，来简化过去的深度序列模型架构，从而得到一个包含selective state space的架构设计
+
 #### 3.1.1 选择性状态空间模型：从S4到S6
 作者认为，序列建模的一个基础问题是把上下文压缩成更小的状态(We argue that a fundamental problem of sequence modeling is compressing context into a smaller state)，从这个角度来看
 
