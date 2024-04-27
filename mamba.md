@@ -189,4 +189,71 @@ Mamba作者在涉及语言、基因组学和音频的许多序列建模任务上
 
 https://zhuanlan.zhihu.com/p/683978639
 
-https://blog.csdn.net/v_JULY_v/article/details/134923301
+**https://blog.csdn.net/v_JULY_v/article/details/134923301**
+
+## 第三部分 Mamba的三大创新
+mamba(其对应论文为：Mamba: Linear-Time Sequence Modeling with Selective State Spaces，这是其对应的GitHub代码地址)，在语言、音频、DNA序列模态上都实现SOTA，在最受关注的语言任务上，Mamba-3B超越同等规模的Transformer，与两倍大的Transformer匹敌，并且相关代码、预训练模型checkpoint都已开源
+
+简言之，Mamba是一种状态空间模型(SSM)，建立在更现代的适用于深度学习的结构化SSM (简称S6)基础上，与经典架构RNN有相似之处
+
+### 3.1 Mamba = 有选择处理信息 + 硬件感知算法 + 更简单的SSM架构
+与先前的研究相比，Mamba主要有三点创新：
+
+对输入信息有选择性处理(Selection Mechanism)
+硬件感知的算法(Hardware-aware Algorithm)
+该算法采用“并行扫描算法”而非“卷积”来进行模型的循环计算(使得不用CNN也能并行训练)，但为了减少GPU内存层次结构中不同级别之间的IO访问，它没有具体化扩展状态
+当然，这点也是受到了S5(Simplified State Space Layers for Sequence Modeling)的启发
+更简单的架构
+将SSM架构的设计与transformer的MLP块合并为一个块(combining the design of prior SSM architectures with the MLP block of Transformers into a single block)，来简化过去的深度序列模型架构，从而得到一个包含selective state space的架构设计
+#### 3.1.1 选择性状态空间模型：从S4到S6
+作者认为，序列建模的一个基础问题是把上下文压缩成更小的状态(We argue that a fundamental problem of sequence modeling is compressing context into a smaller state)，从这个角度来看
+
+transformer的注意力机制虽然有效果但效率不算很高，毕竟其需要显式地存储整个上下文(storing the entire context，也就是KV缓存)，直接导致训练和推理消耗算力大
+好比，Transformer就像人类每写一个字之前，都把前面的所有字+输入都复习一遍，所以写的慢
+RNN的推理和训练效率高，但性能容易受到对上下文压缩程度的限制
+On the other hand, recurrent models are efficient because they have a finite state, implying constant-time inference and linear-time training. However, their effectiveness is limited by how well this state has compressed the context.
+
+好比，RNN每次只参考前面固定的字数(仔细体会这句话：When generating the output, the RNN only needs to consider the previous hidden state and current input. It prevents recalculating all previous hidden states which is what a Transformer would do)，写的快是快，但容易忘掉更前面的内容
+而SSM的问题在于其中的矩阵A B C不随输入不同而不同，即无法针对不同的输入针对性的推理，详见上文的2.4节
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/13c84216-0b2c-43f6-8a75-3fc56470d9cb)
+
+最终，Mamba的解决办法是，相比SSM压缩所有历史记录，mamba设计了一个简单的选择机制，通过“参数化SSM的输入”，让模型对信息有选择性处理，以便关注或忽略特定的输入
+这样一来，模型能够过滤掉与问题无关的信息，并且可以长期记住与问题相关的信息
+好比，Mamba每次参考前面所有内容的一个概括，越往后写对前面内容概括得越狠，丢掉细节、保留大意
+
+为方便大家对比，我再用如下表格总结下各个模型的核心特点
+![image](https://github.com/icey-zhang/notebook/assets/54712081/3dd67973-84fa-4e6d-aa89-8da6f81ab74b)
+
+总之，序列模型的效率与效果的权衡点在于它们对状态的压缩程度：
+
+高效的模型必须有一个小的状态(比如RNN或S4)
+而有效的模型必须有一个包含来自上下文的所有必要信息的状态(比如transformer)
+而mamba为了兼顾效率和效果，选择性的关注必须关注的、过滤掉可以忽略的
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/5beeed44-c4de-4d7b-b7b1-56ec28e4c72b)
+
+##### 3.1.1.1 mamba前身S4的4个参数的不随输入不同而不同
+首先，在其前身S4中，其有4个参数(∆, A, B, C)
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/880af0f4-6016-444d-819e-81fadbc59ac1)
+
+且它们不随输入变化(即与输入无关)，这些参数控制了以下两个阶段
+
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/ee230256-71cd-457b-b256-42baa722c8b0)
+
+
+第一阶段(1a 1b)，通常采用固定公式和，将“连续参数”转化为“离散参数”，其中称为离散化规则，且可以使用多种规则来实现这一转换
+The first stage transforms the “continuous parameters” (∆, A, B) to “discrete parameters” (A, B) through fixed formulas A = 𝑓𝐴(∆, A) and B = 𝑓𝐵(∆, A, B), where the pair (𝑓𝐴, 𝑓𝐵) is called a discretization rule
+
+例如下述方程中定义的零阶保持(ZOH)
+Various rules can be used such as the zero-order hold (ZOH) defined in equation (4).
+
+第二阶段(2a 2b，和3a 3b)，在参数由变换为后，模型可以用两种方式计算，即线性递归(2)或全局卷积(3)
+After the parameters have been transformed from (∆, A, B, C) ↦ (A, B, C), the model can be computed in two ways, either as a linear recurrence (2) or a global convolution (3)
+
+如之前所说的
+  模型通常使用卷积模式(3)可以进行高效的并行化训练「 其中整个输入序列提前看到，为何可以做高效的并行化呢，因为该模式能够绕过状态计算，并实现仅包含(B, L, D)的卷积核(3a)，即Thus the more efficient convolution mode wasintroduced which could bypass the state computation and materializes a convolution kernel (3a) of only (𝙱, 𝙻, 𝙳)」
+  并切换到循环模式(2)以高效的自回归推理(其中输入每次只看到一个时间步)
+the model uses the convolutional mode (3) for efficient parallelizable training (where the whole input sequence is seen ahead of time), and switched into recurrent mode (2) for efficient autoregressive inference (wheret he inputs are seen one timestep at a time
