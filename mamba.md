@@ -211,13 +211,14 @@ mamba(其对应论文为：Mamba: Linear-Time Sequence Modeling with Selective S
 #### 3.1.1 选择性状态空间模型：从S4到S6
 作者认为，序列建模的一个基础问题是把上下文压缩成更小的状态(We argue that a fundamental problem of sequence modeling is compressing context into a smaller state)，从这个角度来看
 
-transformer的注意力机制虽然有效果但效率不算很高，毕竟其需要显式地存储整个上下文(storing the entire context，也就是KV缓存)，直接导致训练和推理消耗算力大
+> transformer的注意力机制虽然有效果但效率不算很高，毕竟其需要显式地存储整个上下文(storing the entire context，也就是KV缓存)，直接导致训练和推理消耗算力大
 好比，Transformer就像人类每写一个字之前，都把前面的所有字+输入都复习一遍，所以写的慢
-RNN的推理和训练效率高，但性能容易受到对上下文压缩程度的限制
+> RNN的推理和训练效率高，但性能容易受到对上下文压缩程度的限制
 On the other hand, recurrent models are efficient because they have a finite state, implying constant-time inference and linear-time training. However, their effectiveness is limited by how well this state has compressed the context.
 
 好比，RNN每次只参考前面固定的字数(仔细体会这句话：When generating the output, the RNN only needs to consider the previous hidden state and current input. It prevents recalculating all previous hidden states which is what a Transformer would do)，写的快是快，但容易忘掉更前面的内容
-而SSM的问题在于其中的矩阵A B C不随输入不同而不同，即无法针对不同的输入针对性的推理，详见上文的2.4节
+
+> 而SSM的问题在于其中的矩阵A B C不随输入不同而不同，即无法针对不同的输入针对性的推理，详见上文的2.4节
 
 ![image](https://github.com/icey-zhang/notebook/assets/54712081/13c84216-0b2c-43f6-8a75-3fc56470d9cb)
 
