@@ -199,11 +199,11 @@ mamba(其对应论文为：Mamba: Linear-Time Sequence Modeling with Selective S
 ### 3.1 Mamba = 有选择处理信息 + 硬件感知算法 + 更简单的SSM架构
 与先前的研究相比，Mamba主要有三点创新：
 
-对输入信息有选择性处理(Selection Mechanism)
-硬件感知的算法(Hardware-aware Algorithm)
+**1.对输入信息有选择性处理(Selection Mechanism)**
+**2.硬件感知的算法(Hardware-aware Algorithm)**
 该算法采用“并行扫描算法”而非“卷积”来进行模型的循环计算(使得不用CNN也能并行训练)，但为了减少GPU内存层次结构中不同级别之间的IO访问，它没有具体化扩展状态
 当然，这点也是受到了S5(Simplified State Space Layers for Sequence Modeling)的启发
-更简单的架构
+**3.更简单的架构**
 将SSM架构的设计与transformer的MLP块合并为一个块(combining the design of prior SSM architectures with the MLP block of Transformers into a single block)，来简化过去的深度序列模型架构，从而得到一个包含selective state space的架构设计
 #### 3.1.1 选择性状态空间模型：从S4到S6
 作者认为，序列建模的一个基础问题是把上下文压缩成更小的状态(We argue that a fundamental problem of sequence modeling is compressing context into a smaller state)，从这个角度来看
@@ -257,3 +257,53 @@ After the parameters have been transformed from (∆, A, B, C) ↦ (A, B, C), th
   模型通常使用卷积模式(3)可以进行高效的并行化训练「 其中整个输入序列提前看到，为何可以做高效的并行化呢，因为该模式能够绕过状态计算，并实现仅包含(B, L, D)的卷积核(3a)，即Thus the more efficient convolution mode wasintroduced which could bypass the state computation and materializes a convolution kernel (3a) of only (𝙱, 𝙻, 𝙳)」
   并切换到循环模式(2)以高效的自回归推理(其中输入每次只看到一个时间步)
 the model uses the convolutional mode (3) for efficient parallelizable training (where the whole input sequence is seen ahead of time), and switched into recurrent mode (2) for efficient autoregressive inference (wheret he inputs are seen one timestep at a time
+
+##### 3.1.1.2 S4中三个矩阵的维度表示、维度变化
+其次，再回顾一下，通过之前的讲解，可知矩阵都可以由个数字表示(the A∈ℝ𝑁×𝑁, B∈ℝ𝑁×1 , C ∈ ℝ1×𝑁 matrices can all be represented by 𝑁 numbers.)
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/e417e85f-ec66-4e84-8c07-abadd528442e)
+
+1.但为了对批量大小为B、长度为L(注意，N <<L，比如类似上文举的例子中，N = 64 L=10000)、具有D个通道(虽然在之前的示例中，每个token的维度设定的1，比如拿 一个 64 × 64维的矩阵A 去记 10000 × 1维的数字，但实际上，经常会遇到一个token不止一个维度的，比如颜色便有R G B三个通道，即embedding的dimension是D )的输入序列进行操作「总之，则是输入和输出，和 Transformer 里面一样, 他们的大小是 (batch size B x sequence length L x embedding dim D)」
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/ee803c22-28b7-478a-b777-cd952fb631b2)
+
+
+Mamba 的处理方式是，给这 D 个 dimension的每个 dimension 都搞一个独立的 SSM，即SSM被独立地应用于每个通道(To operate over an input sequence 𝑥 of batch size 𝐵 and length 𝐿 with 𝐷 channels, the SSM is applied independently to each channel)
+
+2.这就解释了为什么下图中的A、B、C三个矩阵的第一个维度是都是 D
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/f7776191-ea10-4ffe-889f-12031c31c817)
+
+
+请注意，在这种情况下，每个输入的总隐藏状态具有DN维，在序列长度上计算它需要O(BLDN)的时间和内存(the total hidden state has dimension 𝐷𝑁 per input, and computing it over the sequence length requires 𝑂(𝐵𝐿𝐷𝑁) time and memory)
+
+3.1.1.3 mamba：从S4到S6的算法变化流程
+最后，在Mamaba中，作者让B矩阵、C矩阵、∆成为输入的函数，让模型能够根据输入内容自适应地调整其行为
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/e97a475b-5198-47ab-bedb-8ddf4765e51e)
+
+1.从S4到S6的过程中
+\rightarrow  影响输入的B矩阵、影响状态的C矩阵的大小从原来的(D,N)「前面说了，D指的是输入向量的维度，比如一个颜色的变量一般有R G B三个维度，N指SSM的隐藏层维度hidden dimension，当然 一般设的比较小，远小于L 」
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/52d803b2-6ee9-4e69-a41f-f7c1f09dae1d)
+
+变成了(B,L,N)「这三个参数分别对应batch size、sequence length、hidden state size」
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/c71fd8d3-e0ac-4e8c-b859-fa5c4d9aacd7)
+
+  且的大小由原来的D变成了(B,L,D)，意味着对于一个 batch 里的 每个 token (总共有 BxL 个)都有一个独特的
+且每个位置的矩阵、矩阵、都不相同，这意味着对于每个输入token，现在都有独特不同的矩阵、矩阵，可以解决内容感知问题
+
+2.维度上的变化具体执行时是怎么实现的呢？好办，通过
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/b59f85d7-aa4d-4912-813c-ac0885f5771f)
+
+来逐一将B, C, ∆变成输入数据依赖化(data dependent)
+
+其中对于矩阵B、C的代表把维的输入向量经过一个线性层映射到维，有点类似从之前的64 × 3(N × D)变成10000 × 64(L × N)，不过 读到此处的你，可曾想为何不是变成10000 × 64 × 3(L × N × D)呢？
+一个可能的原因是，而和都有这个维度，也就是说最终也会具备这个维度
+虽然没有变成data dependent，但是通过SSM的离散化操作之后，会经过outer product变成(B, L, N, D)的data dependent张量，算是以一种parameter efficient的方式来达到data dependent的目的
+且换个角度看，离散化之后， 的“输入数据依赖性”能够让整体的与输入相关
+
+当然，到底效果变好的最大原因是哪一块，可以参考这篇做下相关的实验：Gated Linear Attention Transformers with Hardware-Efficient Training
+
