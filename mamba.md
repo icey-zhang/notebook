@@ -272,7 +272,7 @@ Mamba 的处理方式是，给这 D 个 dimension的每个 dimension 都搞一�
 
 请注意，在这种情况下，每个输入的总隐藏状态具有DN维，在序列长度上计算它需要O(BLDN)的时间和内存(the total hidden state has dimension 𝐷𝑁 per input, and computing it over the sequence length requires 𝑂(𝐵𝐿𝐷𝑁) time and memory)
 
-3.1.1.3 mamba：从S4到S6的算法变化流程
+##### 3.1.1.3 mamba：从S4到S6的算法变化流程
 最后，在Mamaba中，作者让B矩阵、C矩阵、∆成为输入的函数，让模型能够根据输入内容自适应地调整其行为
 
 ![image](https://github.com/icey-zhang/notebook/assets/54712081/e97a475b-5198-47ab-bedb-8ddf4765e51e)
