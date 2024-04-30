@@ -2,9 +2,9 @@ BEiT：视觉BERT预训练模型
 
 
 本文目录
-- 1 BERT 方法回顾
+>1 BERT 方法回顾
 
-- 2 BERT 可以直接用在视觉任务上吗？
+>2 BERT 可以直接用在视觉任务上吗？
 
 - 3 BEiT 原理分析
 - 3.1 将图片表示为 image patches
