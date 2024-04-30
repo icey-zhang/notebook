@@ -12,3 +12,10 @@ score_thr=0.3
 https://blog.csdn.net/qq_36810398/article/details/116994577
 上面那个方法没有用
 https://blog.csdn.net/qq_38018994/article/details/122320888
+
+## RuntimeError: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+
+因为显存不够，改小batchsize即可
+
