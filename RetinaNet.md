@@ -88,7 +88,7 @@ class PyramidFeatures(nn.Module):
 RetinaNet在特征提取网络ResNet-50和特征融合网络FPN后，对获得的五张特征图[P3_x, P4_x, P5_x, P6_x, P7_x]，通过具有相同权重的框回归和分类子网络，获得所有框位置和类别信息。
 
 框回归子网络定义如下：
-```pyhon
+```python
 class RegressionModel(nn.Module):
     """
     for bounding box regression 
@@ -191,39 +191,39 @@ class ClassificationModel(nn.Module):
 
 介绍完毕ResNet-50,FPN和框回归和分类子网络后，该网络的总模型定义如下，（代码中forward函数）：
 ```python
-  def forward(self, inputs):
+def forward(self, inputs):
 
-      if self.training:
-          img_batch, annotations = inputs
-      else:
-          img_batch = inputs
+  if self.training:
+      img_batch, annotations = inputs
+  else:
+      img_batch = inputs
 
-      # Resnet
-      x = self.conv1(img_batch)
-      x = self.bn1(x)
-      x = self.relu(x)
-      x = self.maxpool(x)
+  # Resnet
+  x = self.conv1(img_batch)
+  x = self.bn1(x)
+  x = self.relu(x)
+  x = self.maxpool(x)
 
-      x1 = self.layer1(x)
-      x2 = self.layer2(x1)
-      x3 = self.layer3(x2)
-      x4 = self.layer4(x3)
+  x1 = self.layer1(x)
+  x2 = self.layer2(x1)
+  x3 = self.layer3(x2)
+  x4 = self.layer4(x3)
 
-      # FPN
-      features = self.fpn([x2, x3, x4]) #pyramid feature
+  # FPN
+  features = self.fpn([x2, x3, x4]) #pyramid feature
 
-      # （batch_size,total_anchor_nums,4）
-      # 框回归子网络
-      regression = torch.cat([self.regressionModel(feature) for feature in features], dim=1)
+  # （batch_size,total_anchor_nums,4）
+  # 框回归子网络
+  regression = torch.cat([self.regressionModel(feature) for feature in features], dim=1)
 
-       # （batch_size,total_anchor_nums,class_num）
-      #  框分类子网络
-      classification = torch.cat([self.classificationModel(feature) for feature in features], dim=1)
+   # （batch_size,total_anchor_nums,class_num）
+  #  框分类子网络
+  classification = torch.cat([self.classificationModel(feature) for feature in features], dim=1)
 ```
 其中子网络的类实例化定义如下：
 ```python
-        self.regressionModel = RegressionModel(256)
-        self.classificationModel = ClassificationModel(256, num_classes=num_classes)
+self.regressionModel = RegressionModel(256)
+self.classificationModel = ClassificationModel(256, num_classes=num_classes)
 ```
 3. 先验框anchor
 每次解析基于anchor的目标检测模型，就一定要对它的anchor部分进行一个详细介绍，RetinaNet也不例外。前面提到的RetinaNet网络的输出为5张大小不同特征图，那么不同大小的特征图自然是负责不同大小物体检测（和特征图所对应的感受野相关）。
@@ -466,16 +466,16 @@ if positive_indices.sum() > 0:
 上述步骤中主要通过anchor,将真实框的信息映射到RetinaNet网络的输出空间上（targets/labels)，同网络在前向过程中的输出（predictions）一起求解损失函数，这就和SSD中的match+encode是类似的。
 最后根据上述映射到输出空间的target,使用focal loss求解损失函数：
 ```python
-                negative_indices = 1 + (~positive_indices)
+negative_indices = 1 + (~positive_indices)
 
-                regression_diff = torch.abs(targets - regression[positive_indices, :])
+regression_diff = torch.abs(targets - regression[positive_indices, :])
 
-                regression_loss = torch.where(
-                    torch.le(regression_diff, 1.0 / 9.0),
-                    0.5 * 9.0 * torch.pow(regression_diff, 2),
-                    regression_diff - 0.5 / 9.0
-                )
-                regression_losses.append(regression_loss.mean())
+regression_loss = torch.where(
+    torch.le(regression_diff, 1.0 / 9.0),
+    0.5 * 9.0 * torch.pow(regression_diff, 2),
+    regression_diff - 0.5 / 9.0
+)
+regression_losses.append(regression_loss.mean())
 ```
 至此，focal loss就讲完了，RetinaNet解析也接近尾声了。
 
