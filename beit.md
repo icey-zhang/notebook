@@ -1,6 +1,3 @@
-![image](https://github.com/icey-zhang/notebook/assets/54712081/6c0b4d2d-e629-465b-b79f-d2947b982271)![image](https://github.com/icey-zhang/notebook/assets/54712081/907f3400-f769-40fe-b4bf-dd040f8022b9)![image](https://github.com/icey-zhang/notebook/assets/54712081/8862a191-6ccf-4bec-9d12-6559568c4407)BEiT：视觉BERT预训练模型
-
-
 本文目录
 >1 BERT 方法回顾
 
@@ -376,3 +373,4 @@ BEIT 遵循 BERT 的训练方法，让 BEIT 看很多的图片，随机盖住一
 
 参考：
 [变分自编码器](https://link.zhihu.com/?target=https%3A//spaces.ac.cn/archives/5253)
+[BEiT：视觉BERT预训练模型](https://zhuanlan.zhihu.com/p/381345343)
