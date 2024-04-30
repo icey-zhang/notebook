@@ -63,3 +63,14 @@ python setup.py build_ext --inplace
 build_ext:build C/C++ extensions (compile/link to build directory)，给python编译一个c、c++的拓展
 –inplace:ignore build-lib and put compiled extensions into the source directory alongside your pure Python modules，忽略build-lib，将编译后的扩展放到源目录中，与纯Python模块放在一起
 
+## 安装MultiScaleDeformableAttention不成功
+可以把下面import的代码修改一下
+```python
+# import MultiScaleDeformableAttention as MSDA
+import mmcv.ops.multi_scale_deform_attn as MSDA
+```
+
+## 一些包换路径了
+https://mmengine.readthedocs.io/zh-cn/v0.3.0/api/generated/mmengine.hooks.Hook.html?highlight=HOOKS
+
+from mmengine.runner import load_checkpoint
