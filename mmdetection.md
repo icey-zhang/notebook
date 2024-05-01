@@ -74,3 +74,6 @@ import mmcv.ops.multi_scale_deform_attn as MSDA
 https://mmengine.readthedocs.io/zh-cn/v0.3.0/api/generated/mmengine.hooks.Hook.html?highlight=HOOKS
 
 from mmengine.runner import load_checkpoint
+
+## mmdetection-8:遥感目标检测-NWPU VHR-10数据集和centerNet的应用
+https://zhuanlan.zhihu.com/p/560986736#SnippetTab
