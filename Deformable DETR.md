@@ -1,4 +1,11 @@
-时间2017年
+DETR 《End-to-end object detection with transformers》，ECCV 2020
+Deformable DETR 《Deformable DETR: Deformable Transformers for End-to-End Object Detection》，ICLR 2021
+Deformable Attention 《Vision Transformer with Deformable Attention》,CVPR 2022
+
+Deformable Attention（可变形注意力）首先在2020年10月初商汤研究院的[《Deformable DETR: Deformable Transformers for End-to-End Object Detection》](https://paperswithcode.com/paper/deformable-detr-deformable-transformers-for-1)论文中提出，在2022CVPR中[《Vision Transformer with Deformable Attention》](https://openaccess.thecvf.com/content/CVPR2022/html/Xia_Vision_Transformer_With_Deformable_Attention_CVPR_2022_paper.html)提出应用了**Deformable Attention（可变形自注意力）机制**的通用视觉Transformer骨干网络DAT（Deformable Attention Transformer），并且在多个数据集上效果优于swin transformer。
+
+在BEV感知算法中，比如DETR3d，BEVFormer等，均采用的是前者中提出的Deformable Attention。具体的维度及细节分析参考博客《Deformable DETR 原理分析》及微信公众号文《搞懂 Vision Transformer 原理和代码，看这篇技术综述就够了（二）》。
+
 
 目录
 - 一、Deformable Convolution原理分析
@@ -96,3 +103,5 @@ Multi-scale Deformable Attention Module
 
 **参考**
 [详解可变形注意力模块（Deformable Attention Module）](https://blog.csdn.net/qq_23981335/article/details/129123581)
+[Deformable DETR 论文+源码解读](https://blog.csdn.net/qq_38253797/article/details/127668593)
+[Deformable DETR论文回稿](https://openreview.net/forum?id=gZ9hCDWe6ke)
