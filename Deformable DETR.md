@@ -1,5 +1,7 @@
 DETR 《End-to-end object detection with transformers》，ECCV 2020
+
 Deformable DETR 《Deformable DETR: Deformable Transformers for End-to-End Object Detection》，ICLR 2021
+
 Deformable Attention 《Vision Transformer with Deformable Attention》,CVPR 2022
 
 Deformable Attention（可变形注意力）首先在2020年10月初商汤研究院的[《Deformable DETR: Deformable Transformers for End-to-End Object Detection》](https://paperswithcode.com/paper/deformable-detr-deformable-transformers-for-1)论文中提出，在2022CVPR中[《Vision Transformer with Deformable Attention》](https://openaccess.thecvf.com/content/CVPR2022/html/Xia_Vision_Transformer_With_Deformable_Attention_CVPR_2022_paper.html)提出应用了**Deformable Attention（可变形自注意力）机制**的通用视觉Transformer骨干网络DAT（Deformable Attention Transformer），并且在多个数据集上效果优于swin transformer。
