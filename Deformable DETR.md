@@ -1,10 +1,10 @@
 时间2017年
 
 目录
-一、Deformable Convolution原理分析
-Deformable DETR 原理分析
-Deformable Attention Module
-Multi-scale Deformable Attention Module
+- 一、Deformable Convolution原理分析
+- Deformable DETR 原理分析
+- Deformable Attention Module
+- Multi-scale Deformable Attention Module
 
 一、Deformable Convolution原理分析
 **Deformable Convolution** 将固定形状的卷积过程改造成了能适应物体形状的可变的卷积过程，从而使结构适应物体形变的能力更强。
