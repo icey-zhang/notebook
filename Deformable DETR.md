@@ -1,3 +1,5 @@
+时间2017年
+
 目录
 一、Deformable Convolution原理分析
 Deformable DETR 原理分析
@@ -41,6 +43,56 @@ Multi-scale Deformable Attention Module
 **Deformable DETR 原理分析**
 我们知道，DETR利用了Transformer通用以及强大的对相关性的建模能力，来取代anchor，proposal等一些手工设计的元素。但是DETR依旧存在2个缺陷：
 
-训练时间极长 ：相比于已有的检测器，DETR需要更久的训练才能达到收敛(500 epochs)，比Faster R-CNN慢了10-20倍。
-计算复杂度高 ：发现DETR对小目标的性能很差，现代许多种检测器通常利用多尺度特征，从高分辨率(High Resolution)的特征图中检测小物体。但是高分辨率的特征图会大大提高DETR复杂度。
+**训练时间极长** ：相比于已有的检测器，DETR需要更久的训练才能达到收敛(500 epochs)，比Faster R-CNN慢了10-20倍。
+**计算复杂度高** ：发现DETR对小目标的性能很差，现代许多种检测器通常利用多尺度特征，从高分辨率(High Resolution)的特征图中检测小物体。但是高分辨率的特征图会大大提高DETR复杂度。
 
+**DETR网络是什么样的结构？**
+产生上面两个问题的原因是：
+
+- 在初始化阶段， **attention map 对于特征图中的所有pixel的权重是一致的，导致要学习的注意力权重集中在稀疏的有意义的位置这一过程需要很长时间**，意思是 attention map 从Uniform到Sparse and meaningful需要很久。
+- attention map 是 Nq x Nk 的，在图像领域我们一般认为 **Nq = Nk = Nv = N = HW**, 所以里面的weights的计算是像素点数目的平方。 因此，处理高分辨率特征图需要非常高的计算量，存储也很复杂。
+
+所以Deformable DETR的提出就是为了解决上面的两个问题，它主要利用了**可变形卷积** (Deformable Convolution)的稀疏空间采样的本领，**以及Transformer的对于相关性建模的能力** 。针对此提出了一种 Deformable Attention Module ，这个东西**只关注一个feature map中的一小部分关键的位置**，起着一种pre-filter的作用 。这个 deformable attention module 可以自然地结合上**FPN ，我们就可以聚集多尺度特征。**
+
+DETR探测小物体方面的性能相对较低，与现代目标检测相比，DETR需要更多的训练epoches才能收敛，这主要是因为处理图像特征的注意模块很难训练。所以本文提出了 Deformable Attention Module 。设计的初衷是：**传统的 attention module 的每个 Query 都会和所有的 Key 做attention，而 Deformable Attention Module 只使用固定的一小部分 Key 与 Query 去做attention，所以收敛时间会缩短。**
+
+Deformable Attention Module
+首先对比下常规attention module与deformable在表达式上的不同：
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/cc48b22b-2fec-405b-afdd-fd2f41275e3e)
+![image](https://github.com/icey-zhang/notebook/assets/54712081/b0392592-2b61-411c-9f82-bcfe26432233)
+![image](https://github.com/icey-zhang/notebook/assets/54712081/2b31f00c-7dde-4a5e-8283-d258e7949b30)
+
+然后再比较一下二者的self-attention module的不同，如下图，可以发现：Deformable的Attention不是又Query和Key矩阵做内积得到的，而是由输入特征 i 直接通过Lienear Transformation得到的。
+
+> Deformable 在具体的代码实现时，Encoder和Decoder的所有attention中除了decoder的self-attention利用Q,K,V三个矩阵，剩下的像encoder的self以及decoder的cross都是只使用了Q,V两个矩阵
+![image](https://github.com/icey-zhang/notebook/assets/54712081/a3b0b0a2-f123-480f-a779-fe94b5c59150)
+
+我们假设输入特征 i 的维度是 (Nq, C) ，他与几个转移矩阵相乘得到δx，δy以及A ，他们的维度都是 （Nq，M*K） ，其中A表示attention，后面会跟value为内积。
+
+δx，δy代表相对参考点的偏移量，对于Encoder来将，Nq=H*W，即特征图上的每一个点都是向量，δx，δy表示的就是特征图上某点（x，y）对应的value的位置，因为value的维度是（HW, C）维的，所以有HW个位置可以对应，我们需要的就是其中K个位置。
+
+同时，输入特征 i 再与转移矩阵W’ 相乘得到 Value∈（HW，C）矩阵，结合前面计算的δx，δy，可以为Nq维的query中的每一个向量都采样K个分量
+
+- 为什么是query中的每一个维都取k个分量，这是因为我们从δx的维度就可以知道（Nq，K），而Attention的维度是（Nq, K）
+
+所以采用之后的Value∈（Nq，K, C），M个head的Value就是（Nq，M，K, C），这样就可以使用Attention中的每一行与Value中的一组（M, K, C）去做weighted sum ，并把结果拼接到一起，得到的输出是O∈（Nq，M, C），最后将所有的head拼接到一起。
+
+Multi-scale Deformable Attention Module
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/bd3a1d28-7955-4f89-937c-92bf4a926b8e)
+式子中 L 表示feature map的level。
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/8198dc64-6c1b-49cd-abe0-b651e9d17611)
+- 这里不使用FPN，是因为每个query会与所有层的Key进行聚合
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/ca02c859-1009-4f0c-81ef-1d933f756fc8)
+
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/40264b76-ff45-4ad0-8d84-debdab7714a2)
+
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/16e866d9-2ea0-4f3d-9d26-805fd6170e7a)
+
+**参考**
+[详解可变形注意力模块（Deformable Attention Module）](https://blog.csdn.net/qq_23981335/article/details/129123581)
