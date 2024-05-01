@@ -274,8 +274,8 @@ def get_reference_points(spatial_shapes, valid_ratios, device):
 
 
 **参考**
-[详解可变形注意力模块（Deformable Attention Module）](https://blog.csdn.net/qq_23981335/article/details/129123581)
-[DETR 论文解读](https://blog.csdn.net/qq_38253797/article/details/127429466)
-[Deformable DETR 论文+源码解读](https://blog.csdn.net/qq_38253797/article/details/127668593)
-[Deformable DETR论文回稿](https://openreview.net/forum?id=gZ9hCDWe6ke)
+[详解可变形注意力模块（Deformable Attention Module）](https://blog.csdn.net/qq_23981335/article/details/129123581) 
+[DETR 论文解读](https://blog.csdn.net/qq_38253797/article/details/127429466) 
+[Deformable DETR 论文+源码解读](https://blog.csdn.net/qq_38253797/article/details/127668593) 
+[Deformable DETR论文回稿](https://openreview.net/forum?id=gZ9hCDWe6ke) 
 [Deformable DETR论文精度+代码详解](https://zhuanlan.zhihu.com/p/596303361)
