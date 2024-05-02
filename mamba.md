@@ -293,4 +293,15 @@ Mamba 的处理方式是，给这 D 个 dimension的每个 dimension 都搞一�
 
 ![image](https://github.com/icey-zhang/notebook/assets/54712081/b120a893-faf3-4e83-8def-d3abb2bad8fb)
 
+## Mamba 块
 
+选择性SSM可以作为一个块，就像在Transformer中的的注意力模块一样。我们可以堆叠多个块，并使用它们的输出作为下一个曼巴块的输入:
+![image](https://github.com/icey-zhang/notebook/assets/54712081/cb18a225-3d19-4312-a1ba-e0423bec2860)
+
+最后一个端到端（输入到输出）的例子包含了归一化层和选择输出标记softmax。
+
+![image](https://github.com/icey-zhang/notebook/assets/54712081/6998f964-3e1b-4528-9d61-0027a1f9db4c)
+
+
+**参考**
+[Mamba详细介绍和RNN、Transformer的架构可视化对比](https://zhuanlan.zhihu.com/p/683513936)
