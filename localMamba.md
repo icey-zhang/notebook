@@ -45,3 +45,5 @@ Mamba 模型利用选择性 SSM，不仅实现了序列长度的线性可扩展�
 
 # 参考
 [Mamba视觉新主干！LocalMamba：全新视觉状态空间模型（商汤）](https://blog.csdn.net/CV_Autobot/article/details/137310346)
+[Visual Transformer (ViT)模型详解](https://blog.csdn.net/lsb2002/article/details/135320751)
+[Swin-Transformer详解](https://blog.csdn.net/hellozhxy/article/details/133918264)
