@@ -28,6 +28,9 @@
 我们的方法的整体架构如图2所示。在多模态输入{xHR, xM s, xSAR}中，每个RSI内的像素在给定相同的地理位置的情况下自然地与其他像素对齐。在此基础上，我们提出了一种分解编码器，它首先独立地从每个RSI中提取空间特征，然后将它们融合以捕获多模态时空表示。该设计将空间特征提取与特征融合分离，使线索与模态、时间和地理上下文的集成成为可能。
 
 
+<img width="1068" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/3cfe7af4-154c-4661-aab1-d191e55ee9dd">
+
+
 ## Sinkhorn-Knopp算法(拓展知识)
 **Sinkhorn-Knopp算法**是一种用于将非负矩阵进行标准化处理的迭代方法，使其行和列的边际分布满足给定的目标分布。这种标准化处理在最优传输（Optimal Transport）问题和其他数据科学领域中有重要应用。算法由Richard Sinkhorn和Paul Knopp在20世纪60年代提出，因此得名。
 
