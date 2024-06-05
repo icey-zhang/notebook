@@ -1,6 +1,8 @@
 # ODGEN: Domain-specific Object Detection Data Generation with Diffusion Models
 
 <img width="798" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/7a9ed4ad-91f6-4791-a0cb-f68a4878b2b3">
+[[Paper]](http://arxiv.org/abs/2405.15199v1) [[Code]]()
+
 
 ## 全文摘要
 这篇论文介绍了一种名为ODGEN的新方法，用于为对象检测任务生成高质量的数据集。该方法使用扩散模型进行图像生成，并通过合成视觉提示和物体描述来控制模型，从而实现对复杂场景和特定领域的处理。实验结果表明，ODGEN可以显著提高对象检测器的精度，甚至在一般领域中也具有优势。
