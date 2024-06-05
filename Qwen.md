@@ -1,3 +1,5 @@
+[[Paper]](https://arxiv.org/abs/2308.12966) [[Code]](https://github.com/QwenLM/Qwen/tree/main) [Document](https://qwen.readthedocs.io/zh-cn/latest/)
+
 ### 论文总结
 
 这篇论文介绍了Qwen-VL系列，这是一组基于Qwen-7B语言模型的高性能和多功能视觉语言基础模型。该系列包括视觉接收器、语言对齐视觉编码器和位置感知适配器，并通过精心设计的三阶段训练管道对大量图文语料库进行优化。这些模型能够执行各种视觉语言任务，如图像描述、问题回答、面向文本的问题回答和视觉定位。
