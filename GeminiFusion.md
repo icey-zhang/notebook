@@ -1,4 +1,4 @@
-GeminiFusion: Efficient Pixel-wise Multimodal Fusion for Vision Transformer
+# GeminiFusion: Efficient Pixel-wise Multimodal Fusion for Vision Transformer
 
 <img width="664" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/b4372f5f-7e8a-48dc-9f50-80ba946b7521">
 
