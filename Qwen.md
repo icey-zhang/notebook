@@ -1,3 +1,8 @@
+# Qwen-VL: A Versatile Vision-Language Model for Understanding, Localization, Text Reading, and Beyond
+
+<img width="906" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/887eea64-ca5e-423c-a969-4754ae984d71">
+
+
 [[Paper]](https://arxiv.org/abs/2308.12966) [[Code]](https://github.com/QwenLM/Qwen/tree/main) [[Document]](https://qwen.readthedocs.io/zh-cn/latest/)
 
 ### 论文总结
