@@ -1,4 +1,4 @@
-[[Paper]](https://arxiv.org/abs/2308.12966) [[Code]](https://github.com/QwenLM/Qwen/tree/main) [Document](https://qwen.readthedocs.io/zh-cn/latest/)
+[[Paper]](https://arxiv.org/abs/2308.12966) [[Code]](https://github.com/QwenLM/Qwen/tree/main) [[Document]](https://qwen.readthedocs.io/zh-cn/latest/)
 
 ### 论文总结
 
