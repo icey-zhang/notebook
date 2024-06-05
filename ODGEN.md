@@ -1,7 +1,8 @@
 # ODGEN: Domain-specific Object Detection Data Generation with Diffusion Models
 
 <img width="798" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/7a9ed4ad-91f6-4791-a0cb-f68a4878b2b3">
-[Paper](http://arxiv.org/abs/2405.15199v1) [[Code]]()
+
+[【Paper】](http://arxiv.org/abs/2405.15199v1) [[Code]]()
 
 
 ## 全文摘要
