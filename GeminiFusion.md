@@ -17,7 +17,7 @@ $$
 X2[i] = X2[i] \cdot \mathbb{I}(s(X2[i]) \geq \theta) + X1[i] \cdot \mathbb{I}(s(X2[i]) < \theta)
 $$
 
-其中，$X1[i]$表示输入 $X1$ 的第 $i$ 个 token，$\mathbb{I}$ 是断言下标条件的指示符，输出一个掩码张量，参数 $\theta$ 是一个小阈值，取值为 0.02，操作符 $\cdot$ 表示逐元素相乘。
+其中，$X1[i]$表示输入$X1$的第$i$个token，$\mathbb{I}$ 是断言下标条件的指示符，输出一个掩码张量，参数 $\theta$ 是一个小阈值，取值为 0.02，操作符 $\cdot$ 表示逐元素相乘。
 
 $\sqrt{3x-1}+(1+x)^2$
 $X1[i]$
