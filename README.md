@@ -5,4 +5,4 @@
 
 论文阅读：
 
-1.[GeminiFusion](https://github.com/icey-zhang/notebook/blob/main/GeminiFusion.md): Efficient Pixel-wise Multimodal Fusion for Vision Transformer
+1. [GeminiFusion](https://github.com/icey-zhang/notebook/blob/main/GeminiFusion.md): Efficient Pixel-wise Multimodal Fusion for Vision Transformer
