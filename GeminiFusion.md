@@ -2,9 +2,7 @@ GeminiFusion: Efficient Pixel-wise Multimodal Fusion for Vision Transformer
 
 <img width="664" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/b4372f5f-7e8a-48dc-9f50-80ba946b7521">
 
-[[Paper]]([https://readpaper.com/pdf-annotate/note?pdfId=2343320277444289280&from_extension=true&noteId=2343802835240024576](https://arxiv.org/abs/2406.01210)) 
-
-[[Code]](https://github.com/JiaDingCN/GeminiFusion)
+[[Paper]](https://arxiv.org/abs/2406.01210) [[Code]](https://github.com/JiaDingCN/GeminiFusion)
 
 # 方法
 
