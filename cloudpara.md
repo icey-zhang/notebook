@@ -1,2 +1,10 @@
 【文献1】 [WodNet: Weak object discrimination network for cloud detection](https://www.researchgate.net/profile/Xiao-Huang-37/publication/381004679_WodNet_Weak_object_discrimination_network_for_cloud_detection/links/66592c25bc86444c721ef453/WodNet-Weak-object-discrimination-network-for-cloud-detection.pdf)
 <img width="576" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/da6bfee8-f380-47be-b906-5360b803249c">
+
+【文献2】 [Cloud detection with boundary nets](https://www.sciencedirect.com/science/article/pii/S0924271622000521?ref=pdf_download&fr=RR-2&rr=88f79a2f6b5efad6)
+<img width="1266" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/723f3838-7a29-4995-a237-e3ae758c99f2">
+
+【文献3】 [MCDNet: Multilevel cloud detection network for remote sensing images based on dual-perspective change-guided and multi-scale feature fusion)
+<img width="586" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/7da6ea0f-a66d-4dfb-b764-7eee5ff13c25">
+
+
