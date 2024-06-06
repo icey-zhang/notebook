@@ -14,3 +14,8 @@
 【文献5】 [AMCD-Net: An Effective Attention-Aided Multilevel Cloud Detection Network for Optical Satellite Imagery](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10458681)
 <img width="751" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/a0c6234a-cf97-44a0-9482-15906cee9c03">
 <img width="773" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/cefebac6-ba07-4d12-8314-0ec30fa7cd85">
+
+【文献6】 [Cloud-Net: An End-to-end Cloud Detection Algorithm for Landsat 8 Imagery](https://arxiv.org/pdf/1901.10077.pdf)
+<img width="393" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/26bd97f0-0291-4784-adc1-9d69e6b97a65">
+
+【文献7】 [Remote sensing image cloud detection using a shallow convolutional neural network](https://www.sciencedirect.com/science/article/pii/S0924271624000352)
