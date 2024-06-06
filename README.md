@@ -10,7 +10,7 @@
 
 论文阅读:
 
-1. [GeminiFusion](https://github.com/icey-zhang/notebook/blob/main/GeminiFusion.md) |GeminiFusion: Efficient Pixel-wise Multimodal Fusion for Vision Transformer
-2. [Qwen-VL](https://github.com/icey-zhang/notebook/blob/main/Qwen.md) |Qwen-VL: A Versatile Vision-Language Model for Understanding, Localization, Text Reading, and Beyond
-3. [ODGEN](https://github.com/icey-zhang/notebook/blob/main/ODGEN.md) |ODGEN: Domain-specific Object Detection Data Generation with Diffusion Models
-4. [ControlNets](https://github.com/icey-zhang/notebook/blob/main/ControlNets.md) |Adding Conditional Control to Text-to-Image Diffusion Models
+1. [GeminiFusion](https://github.com/icey-zhang/notebook/blob/main/GeminiFusion.md) | GeminiFusion: Efficient Pixel-wise Multimodal Fusion for Vision Transformer
+2. [Qwen-VL](https://github.com/icey-zhang/notebook/blob/main/Qwen.md) | Qwen-VL: A Versatile Vision-Language Model for Understanding, Localization, Text Reading, and Beyond
+3. [ODGEN](https://github.com/icey-zhang/notebook/blob/main/ODGEN.md) | ODGEN: Domain-specific Object Detection Data Generation with Diffusion Models
+4. [ControlNets](https://github.com/icey-zhang/notebook/blob/main/ControlNets.md) | Adding Conditional Control to Text-to-Image Diffusion Models
