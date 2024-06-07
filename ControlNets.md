@@ -23,17 +23,6 @@ controlnet
 #### 解决的问题
 该论文主要解决了如何提高图像扩散模型的灵活性和可控性的问题。通过使用ControlNet，用户可以根据需要为每个神经网络块添加不同的条件，从而更好地控制生成的图像。此外，通过使用Zero Convolution保护后背，该方法还可以消除随机噪声，提高模型的稳定性和可靠性。
 
-![image](https://github.com/icey-zhang/notebook/assets/54712081/b195139b-7540-441a-85b8-d64ab67966ff)
-
-
-![image](https://github.com/icey-zhang/notebook/assets/54712081/d24c8213-bc90-4983-851f-0c54c540bae7)
-
-
-![image](https://github.com/icey-zhang/notebook/assets/54712081/c17bd47e-8fd9-4ffa-b4d6-6fbc1392bf15)
-
-
-![image](https://github.com/icey-zhang/notebook/assets/54712081/070b2288-7b72-4df7-a06a-54d3d4afde70)
-
 
 ### 论文实验
 本文主要介绍了作者使用ControlNets结合Stable Diffusion进行图像生成的实验，并进行了多种条件下的测试和比较。具体来说，作者进行了以下四个方面的实验：
