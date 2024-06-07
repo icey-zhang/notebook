@@ -5,6 +5,20 @@
 
 [[Paper]](https://arxiv.org/abs/2308.12966) [[Code]](https://github.com/QwenLM/Qwen/tree/main) [[Document]](https://qwen.readthedocs.io/zh-cn/latest/)
 
+## 使用方法1
+直接打开官网使用：https://tongyi.aliyun.com/qianwen/
+
+## 使用方法2
+通过ollama使用
+- 下载ollama软件
+https://ollama.com/
+- 在终端输入 
+```bash
+ollama run qwen2
+```
+<img width="415" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/f2ff19fb-96cd-4920-81ae-6f3796d27286">
+
+
 ## 论文总结
 
 这篇论文介绍了Qwen-VL系列，这是一组基于Qwen-7B语言模型的高性能和多功能视觉语言基础模型。该系列模型通过引入视觉接收器、语言对齐视觉编码器和位置感知适配器，使大语言模型具备视觉能力。通过精心设计的三阶段训练管道，Qwen-VL能够执行多种视觉语言任务，如图像描述、问题回答、文本导向问题回答和视觉定位。
