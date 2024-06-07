@@ -37,14 +37,6 @@ controlnet
 
 总的来说，本文的实验结果表明，ControlNets结合Stable Diffusion可以有效地处理多样化的条件，并产生清晰、锐利的结果。此外，作者还提出了一些替代结构和量化评估方法，以进一步提高模型的性能和可靠性。
 
-![image](https://github.com/icey-zhang/notebook/assets/54712081/de0e2e61-7932-4c28-a7b6-d3b4de910bc0)
-
-
-![image](https://github.com/icey-zhang/notebook/assets/54712081/87554ecd-f94a-481f-9b19-9c7de387daa1)
-
-
-![image](https://github.com/icey-zhang/notebook/assets/54712081/85dd756a-ed8b-432e-a4d5-3eb36e0a0032)
-
 ## 论文总结
 ### 文章优点
 该论文提出了一种名为ControlNet的神经网络结构，用于学习控制大型预训练文本到图像扩散模型的条件控制。通过保留大型模型的质量和能力，并锁定其参数，同时创建一个可训练的编码层副本来实现这一目标。这种方法可以有效地控制稳定扩散，包括使用各种条件输入，如边缘地图、人体姿态骨架、分割映射等。此外，该方法还具有稳健性和可扩展性，可以在不同大小的数据集上进行训练，并且在某些任务中可以获得与工业级模型相当的结果。
