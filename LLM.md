@@ -15,55 +15,55 @@
 提取码: 5btt
 
 # [LLM PTQ量化经典研究解析](https://mp.weixin.qq.com/s/01rDsMHY6pBHmGhwZhouvQ)
-GPTQ
-论文: GPTQ: 准确的训练后量化用于生成预训练变换器
-代码: GitHub
-类型: W4A16
-特点: 利用Hessian矩阵进行权重更新，加速量化过程，舍弃贪心策略，使用批处理更新和Cholesky分解。
-LLM.int8()
-论文: LLM.int8: 大规模变换器的8位矩阵乘法
-代码: GitHub
-类型: W8A8
-特点: 发现并处理离群点，采用分而治之策略，混合精度计算。
-SmoothQuant
-论文: SmoothQuant: 大语言模型准确高效的训练后量化
-代码: GitHub
-类型: W8A8
-特点: 通过平滑权重和激活值，解决量化难点，已集成到主流框架中。
-AWQ
-论文: AWQ: 激活感知的权重量化用于LLM压缩和加速
-代码: GitHub
-类型: W4A16
-特点: 关注低比特量化，发现权重敏感性不平衡，使用激活值定位关键权重，保护模型性能。
-ZeroQuant系列
-代码: GitHub
-特点: 提供端到端量化推理流水线，涵盖多种量化方法，适用于大规模模型。
-Olive
-类型: W4A4
-特点: 从硬件层面优化离群值计算，局部处理离群值，提高硬件效率。
-Outlier Suppression
-论文: Outlier Suppression: 推动低比特变换器语言模型的极限
-代码: GitHub
-类型: W8A8
-特点: 抑制离群值影响，通过Gamma迁移和token-wise剪切优化量化。
-SpQR
-论文: SpQR: 近无损的LLM权重压缩的稀疏量化表示
-特点: 结合AWQ、GPTQ和LLM.int8()，识别敏感权重，提供混合精度压缩表示。
-OWQ
-论文: OWQ: 异常值感知的权重量化用于LLM有效微调和推理
-代码: GitHub
-类型: W4A16
-特点: 使用海森矩阵筛选敏感列，存储在更高精度中，支持特定任务的微调。
-SqueezeLLM
-代码: GitHub
-类型: W4A16
-特点: 使用近似Fisher信息度量敏感度，非均匀量化，稠密和稀疏分解。
-RPTQ
-论文: RPTQ: 基于重排的大型语言模型训练后量化
-代码: GitHub
-类型: W4A4/W4A8/W4A4KV
-特点: 重排激活值channel，减少量化误差，优化内存重排开销。
-ATOM
-论文: ATOM: 低比特量化用于高效和准确的LLM服务
-代码: GitHub
-请注意，以上信息是根据提供的链接内容整理而成，具体细节和完整算法描述请参阅原论文或代码仓库。
+## GPTQ
+- 论文: GPTQ: ACCURATE POST-TRAINING QUANTIZATION FOR GENERATIVE PRE-TRAINED TRANSFORMERS
+- 代码: https://github.com/IST-DASLab/gptq
+- 类型: W4A16
+- 描述: GPTQ采用海森矩阵计算量化误差，优化权重更新，使用Cholesky分解加速过程，有效解决了权重优化问题。
+## LLM.int8()
+- 论文: LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale
+- 代码: https://github.com/TimDettmers/bitsandbytes
+- 类型: W8A8
+- 描述: LLM.int8()通过离群点检测，将含有异常值的部分用fp16计算，剩余部分用int8量化，实现了近乎无损的精度。
+## SmoothQuant
+- 论文: SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models
+- 代码: https://github.com/mit-han-lab/smoothquant, https://github.com/Guangxuan-Xiao/torch-int
+- 类型: W8A8
+- 描述: SmoothQuant通过平滑weight和channel维度的activation，使得量化更加容易，成为W8A8的业界主流。
+## AWQ
+- 论文: AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration
+- 代码: https://github.com/mit-han-lab/llm-awq
+- 类型: W4A16
+- 描述: AWQ通过激活值发现重要weight，对weight进行per-channel的scale，对activation除以scale，寻找最小化量化误差的scale，是当前W4A16的SOTA。
+## ZeroQuant系列
+- 代码: https://github.com/microsoft/DeepSpeed
+- 描述: ZeroQuant系列由微软DeepSpeed团队推出，包括对weight和activation的不同量化方法，引入了低秩补偿(LoRC)技术，探索了FP8和FP4格式量化，以及硬件增强型量化框架。
+## SpQR
+- 论文: SpQR: A Sparse-Quantized Representation for Near-Lossless LLM Weight Compression
+- 代码: https://github.com/Vahe1994/SpQR
+- 类型: W4A16
+- 描述: SpQR通过计算参数敏感度，对敏感weight和异常值进行特殊处理，存储在更高精度中，其余权重压缩为3-4比特，形成一种压缩表示。
+## OWQ
+- 论文: OWQ: Outlier-Aware Weight Quantization for Efficient Fine-Tuning and Inference of Large Language Models
+- 代码: https://github.com/xvyaward/owq
+- 类型: W4A16
+- 描述: OWQ使用海森矩阵计算敏感度，将敏感列用fp16存储，其余低比特量化，提出对特定任务finetune采取对弱列微调的方式，节省内存开销。
+## SqueezeLLM
+- 论文: SqueezeLLM: Dense-and-Sparse Quantization
+- 代码: https://github.com/SqueezeAILab/SqueezeLLM
+- 类型: W4A16
+- 描述: SqueezeLLM基于权重量化特性，结合了稠密和稀疏量化，提出了针对LLM特性的量化策略。
+## ATOM
+- 论文: ATOM: LOW-BIT QUANTIZATION FOR EFFICIENT AND ACCURATE LLM SERVING
+- 代码: https://github.com/efeslab/Atom
+- 类型: W4A4
+- 描述: ATOM针对LLM特性，提出混合精度量化策略，包括对outlier activation的INT8量化，normal值的INT4量化，以及group量化和动态量化技术。
+## OliVe
+- 论文: OliVe: Accelerating Large Language Models via Hardware-friendly Outlier-Victim Pair Quantization
+- 类型: W4A4
+- 描述: OliVe从硬件层面优化离群值计算，提出了牺牲正常值以适应离群值的量化策略，提高硬件效率。
+## Outlier Suppression
+- 论文: Outlier Suppression: Pushing the Limit of Low-bit Transformer Language Models
+- 代码: https://github.com/wimh966/outlier_suppression
+- 类型: W8A8
+- 描述: Outlier Suppression通过抑制离群值放大器γ和对离群值进行剪切，来减少离群值对量化精度的影响。
