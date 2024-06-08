@@ -2,7 +2,7 @@
 
 <img width="600" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/0382fa34-c3d2-4732-99b8-d50697215c6b">
 
-[【Paper】](https://arxiv.org/abs/2401.17270) [【Code】](https://github.com/AILab-CVC/YOLO-World)
+[【Paper】](https://arxiv.org/abs/2401.17270) [【Code】](https://github.com/AILab-CVC/YOLO-World) [【Data】](https://github.com/AILab-CVC/YOLO-World/blob/master/docs/data.md)
 
 ## 摘要
 You Only Look Once (YOLO)系列检测器已将自己确立为高效实用的工具。然而，它们对预定义和经过训练的对象类别的依赖限制了它们在开放场景中的适用性。为了解决这一限制，我们引入了 YOLO-World，这是一种创新的方法，通过视觉语言建模和大规模数据集的预训练来增强 YOLO，具有开放词汇检测能力。具体来说，我们提出了一种新的可重新参数化视觉语言路径聚合网络（RepVL-PAN）和区域-文本对比损失，以促进视觉和语言信息之间的交互。我们的方法擅长以高效率的零样本方式检测广泛的对象。在具有挑战性的LVIS数据集上，YOLO-World在V100上实现了35.4 AP，在精度和速度方面都优于许多最先进的方法。此外，微调后的 YOLO-World 在几个下游任务（包括对象检测和开放词汇实例分割）上取得了显着的性能。
