@@ -231,7 +231,9 @@ YOLO-World 是基于 MMYOLO 和 MMDetection 工具箱开发的。按照 [20]，�
 我们提出了 YOLO-World，这是一种先进的实时开放词汇检测器，旨在提高现实世界应用中的效率和开放词汇能力。本文通过将流行的 YOLO 重新设计为一种视觉-语言 YOLO 架构进行开放词汇预训练和检测，提出了连接视觉和语言信息的 RepVL-PAN，并可以重新参数化以便高效部署。实验结果表明，YOLO-World 在速度和开放词汇性能方面具有明显优势，并证明了在小模型上进行视觉-语言预训练的有效性，这对未来研究具有启发性。我们希望 YOLO-World 能作为解决现实世界开放词汇检测的新基准。
 
 
+## 复现教程
 
+[【Code】](https://docs.ultralytics.com/zh/models/yolo-world/#benefits-of-saving-with-custom-vocabulary)
 
 
 
