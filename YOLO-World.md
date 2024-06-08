@@ -233,7 +233,7 @@ YOLO-World 是基于 MMYOLO 和 MMDetection 工具箱开发的。按照 [20]，�
 
 ## 复现教程
 
-[【Code】](https://docs.ultralytics.com/zh/models/yolo-world/#benefits-of-saving-with-custom-vocabulary)
+[【Readme】](https://docs.ultralytics.com/zh/models/yolo-world/#benefits-of-saving-with-custom-vocabulary)
 
 
 
