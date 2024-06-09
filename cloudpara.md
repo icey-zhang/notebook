@@ -20,7 +20,7 @@
 
 【文献7】 [Remote sensing image cloud detection using a shallow convolutional neural network](https://www.sciencedirect.com/science/article/pii/S0924271624000352)
 
-【文献7】 [Multipath Multiscale Attention Network for Cloud and Cloud Shadow Segmentation](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10474436)
+【文献8】 [Multipath Multiscale Attention Network for Cloud and Cloud Shadow Segmentation](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10474436)
 <img width="701" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/6416a523-d1ab-4342-bfbb-f9f452bb9c18">
 
 <img width="703" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/52a9f5d0-a9ee-497b-a459-648309387964">
