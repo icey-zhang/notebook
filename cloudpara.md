@@ -8,7 +8,7 @@
 
 <img width="586" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/7da6ea0f-a66d-4dfb-b764-7eee5ff13c25">
 
-【文献4】 [Residual Dual U-Shape Networks With Improved Skip Connections for Cloud Detection](https://www.sciencedirect.com/science/article/pii/S1569843224001742)
+【文献4】 [Residual Dual U-Shape Networks With Improved Skip Connections for Cloud Detection](https://ieeexplore.ieee.org/abstract/document/10335738)
 <img width="688" alt="image" src="https://github.com/icey-zhang/notebook/assets/54712081/0e410e43-5626-4b6d-b38b-e5781c02105e">
 
 【文献5】 [AMCD-Net: An Effective Attention-Aided Multilevel Cloud Detection Network for Optical Satellite Imagery](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10458681)
