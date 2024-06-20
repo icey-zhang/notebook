@@ -1,4 +1,3 @@
-![image](https://github.com/icey-zhang/notebook/assets/54712081/6c8759ae-35f3-46f8-a3ec-595945873ef1)
 
 **面向数字基础设施**的开源操作系统（openEuler）
 
