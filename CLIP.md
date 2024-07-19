@@ -137,6 +137,7 @@ CV领域的模型都很大，训练起来也很贵。比如noise student之前�
 ​        作者尝试了集成多个模板的效果，即在多个zero-shot分类器上进行集成，这些分类器使用不同的提示模板来构造不同的文本。由于是在嵌入空间(embedding space)而不是概率空间(probability space)上集成的，因此节约了计算成本。在大多数数据集上，prompt ensembling都能够提升模型性能。
 
   最终作者使用了80种模板来进行集成，每种模板使用了不同的形容词，来，描述不同的情境。
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/02191521495041acb0528faf4524466f.png)
 
 上图横坐标表示模型算力，纵坐标表示在多个数据集上的平均分数。绿色曲线表示本文中使用Prompt engineering and ensembling的结果，蓝色曲线表示直接使用无提示上下文的类名的结果。
@@ -164,7 +165,8 @@ CV领域的模型都很大，训练起来也很贵。比如noise student之前�
 - 在ImageNet21K上训练的BiT-M （big transfer），是一个很强的baseline。
 - 基于SimCLRv2训练的ResNet50，
 - 有监督训练的ResNet50。
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/915bf51100b94613b5013eb4089363f1.png)
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/915bf51100b94613b5013eb4089363f1.png)
 
 - 横坐标：每个数据集每个类别里，用了多少个标注样本进行Linear Probe的分类器训练。0就相当于zero-shot了。
 - 纵坐标表示在20个数据集上的平均分类准确度（有7个数据集每个类别不够16个）
