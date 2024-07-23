@@ -149,21 +149,22 @@ return x + attn
 
 [【卷积参考】](https://www.bilibili.com/video/BV1Sh4y1y75i/?spm_id_from=333.337.search-card.all.click&vd_source=ee28f748a7042b99cf81403720f8106e)
 **普通卷积**
-<img width="1048" alt="image" src="https://github.com/user-attachments/assets/bb610fdc-3316-46d4-81fa-a2379cc7ff1b">
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/bb610fdc-3316-46d4-81fa-a2379cc7ff1b">
 
 **空洞卷积**
-<img width="1071" alt="image" src="https://github.com/user-attachments/assets/974c7acd-d13a-45a0-9f0b-59304d71a5e4">
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/974c7acd-d13a-45a0-9f0b-59304d71a5e4">
 
 **Depth-wise 卷积**
-[【Conv2Former】]https://github.com/HVision-NKU/Conv2Former/blob/main/convmod.py
+[【Conv2Former】](https://github.com/HVision-NKU/Conv2Former/blob/main/convmod.py)
 这篇论文的[【讲解】](https://zhuanlan.zhihu.com/p/589738842)
+卷积的[【解释】](https://blog.csdn.net/Bolly_He/article/details/124107316)
 概念
 
 Depth-wise 卷积是一种高效的卷积操作，主要用于降低计算复杂度和参数数量。它将传统卷积分解为两个步骤：depth-wise 卷积和 point-wise 卷积。
 
 步骤
 1.Depth-wise 卷积: 对输入的每个通道分别进行卷积操作。假设输入有C个通道，每个通道使用一个单独的$3\times 3$卷积核进行卷积，因此总共有C个卷积核。
-2.Point-wise 卷积: 使用  $1 \times 1$  卷积对 depth-wise 卷积的输出进行线性组合，将通道信息重新组合。
+2.Point-wise 卷积: 使用$1\times 1$卷积对 depth-wise 卷积的输出进行线性组合，将通道信息重新组合。
 
 优点
 - 减少了计算量和参数数量。
@@ -173,11 +174,16 @@ Depth-wise 卷积是一种高效的卷积操作，主要用于降低计算复杂
 <img width="983" alt="image" src="https://github.com/user-attachments/assets/75fa9dbb-5717-45d4-b29c-55667190b89c">
 
 有9个偏移量，每个偏移量有x，y两个参数，所以通道数为18
-<img width="1087" alt="image" src="https://github.com/user-attachments/assets/771e4853-4d10-4d77-b5bb-1ba54150dddc">
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/771e4853-4d10-4d77-b5bb-1ba54150dddc">
 
-得到亚像素点
-<img width="609" alt="image" src="https://github.com/user-attachments/assets/2494608f-936e-4dfb-9d42-7be31c6ecdd9">
-<img width="1241" alt="image" src="https://github.com/user-attachments/assets/5ae0d34e-f953-43c2-a815-bd104f4d709f">
+得到亚像素点的位置
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/2494608f-936e-4dfb-9d42-7be31c6ecdd9">
+
+亚像素点位置的像素指再和w算卷积结果
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/5ae0d34e-f953-43c2-a815-bd104f4d709f">
+
+怎么得到亚像素点位置的像素值-双线性插值
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/3599569d-730d-4857-940e-fed0e9ca78a2">
 
 
 概念
