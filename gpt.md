@@ -11,8 +11,21 @@ pip install optax==0.1.7 -i  https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 ## step 2 下载数据集
+[【数据集路径】](https://huggingface.co/datasets/roneneldan/TinyStories/tree/main)
 
-## step 3 修改代码
+## step 3 运行代码transfomer.py
+会出现错误
+attn = nn.MultiHeadDotProductAttention(
+TypeError: __call__() missing 1 required positional argument: 'inputs_kv'
+
+修改第73行
+```python
+attn = nn.MultiHeadDotProductAttention(
+    num_heads=n_heads, qkv_features=d_model // n_heads, out_features=d_model, param_dtype=D_TYPE
+)(y,y, mask=mask)
+```
+
+
 
 
 
