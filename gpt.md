@@ -254,7 +254,7 @@ class KANTransformer(nn.Module):
         # Shape (batch_size, seq_len, d_model) -> (batch_size, seq_len, vocab_size)
         x = nn.Dense(features=TOKENIZER_SIZE, use_bias=False, param_dtype=D_TYPE)(x)
         return x
-```python
+```
 
 训练4h 47m 5s，一半报错 Segmentation fault
 
