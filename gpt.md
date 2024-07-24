@@ -21,7 +21,13 @@ dataset = load_dataset("/home/zjq/dataset/TinyStories")
 
 ### 数据集介绍
 134M tokens of [TinyStories](https://arxiv.org/abs/2305.07759)
-TinyStories数据集包含许多简短的故事，这些故事可以用于训练和评估语言模型的生成能力。每个故事通常包含一个或多个情节，展示了角色的行为、情感以及事件的发生和发展。
+TinyStories数据集由GPT-3.5和GPT-4合成生成的短篇故事，这些故事仅使用较小的词汇量。包含许多简短的故事，这些故事可以用于训练和评估语言模型的生成能力。每个故事通常包含一个或多个情节，展示了角色的行为、情感以及事件的发生和发展。
+
+- tinystories_all_data.tar.gz - 包含故事的超集，以及创建每个故事时使用的元数据和提示。
+- TinyStoriesV2-GPT4-train.txt - 是基于GPT-4生成的新版本数据集（原数据集中也有GPT-3.5生成的内容，但质量较低）。它包含TinyStories.txt中所有由GPT-4生成的示例作为子集（但规模显著更大）。
+- Evaluation_prompts.yaml: 用于评估我们模型的提示列表（详见论文）。
+
+
 
 ## step 3 运行代码transformer.py
 会出现错误
