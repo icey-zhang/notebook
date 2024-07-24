@@ -19,6 +19,10 @@ pip install optax==0.1.7 -i  https://pypi.tuna.tsinghua.edu.cn/simple
 dataset = load_dataset("/home/zjq/dataset/TinyStories")
 ```
 
+### 数据集介绍
+134M tokens of [TinyStories](https://arxiv.org/abs/2305.07759)
+TinyStories数据集包含许多简短的故事，这些故事可以用于训练和评估语言模型的生成能力。每个故事通常包含一个或多个情节，展示了角色的行为、情感以及事件的发生和发展。
+
 ## step 3 运行代码transformer.py
 会出现错误
 attn = nn.MultiHeadDotProductAttention(
