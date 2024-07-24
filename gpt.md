@@ -1,6 +1,8 @@
 参考：[李沐论文精读】GPT、GPT-2和GPT-3论文精读](https://blog.csdn.net/qq_45276194/article/details/136530979)
 
 # 实践项目 KAN-GPT-2
+<img width="731" alt="image" src="https://github.com/user-attachments/assets/da087340-f21b-4c62-bb49-7be512327a9d">
+
 [【Code】](https://github.com/CG80499/KAN-GPT-2)
 [【Data】](https://huggingface.co/datasets/roneneldan/TinyStories/tree/main)
 
@@ -197,11 +199,55 @@ Depth-wise 卷积是一种高效的卷积操作，主要用于降低计算复杂
 - 提高了模型在处理几何变形上的鲁棒性。
 - 适用于物体检测和分割等需要处理复杂几何变形的任务。
 
+**如何修改？**
+### 定义卷积模块
+```python
+class ConvMod(nn.Module):
+    dim: int
+    kernel_size: int = 11  # 卷积核的大小
+    padding: int = 5       # 填充大小
 
+    @nn.compact
+    def __call__(self, x):
+        # 先对输入进行 LayerNorm
+        x = nn.LayerNorm(epsilon=1e-6)(x)
 
-如何修改？
+        # 一维卷积层
+        conv_a = nn.Conv(features=self.dim, kernel_size=(1,))(x)  # 1D卷积，改变通道数
+        conv_a = jax.nn.gelu(conv_a)  # 使用 jax.nn.gelu 进行激活
+        # print(conv_a.shape) #(16, 64, 128)
+        conv_a = nn.Conv(features=self.dim, kernel_size=(self.kernel_size,), padding='SAME', feature_group_count=self.dim)(conv_a)  # depthwise 1D卷积
+        conv_v = nn.Conv(features=self.dim, kernel_size=(1,))(x)  # 1D卷积，用于生成卷积的值
+        x = conv_a * conv_v  # 逐元素相乘
+        x = nn.Conv(features=self.dim, kernel_size=(1,))(x)  # 1D卷积，映射回原始维度
 
+        return x
 
+```
+### 替换自注意力机制 
+```python
+class KANTransformer(nn.Module):
+    d_model: int
+    n_heads: int
+    n_layers: int
+
+    @nn.compact
+    def __call__(self, x):
+        # Shape (batch_size, seq_len) -> (batch_size, seq_len, d_model)
+        x = nn.Embed(num_embeddings=TOKENIZER_SIZE, features=self.d_model, param_dtype=D_TYPE)(x)
+        pos_emb = nn.Embed(num_embeddings=MAX_LEN, features=self.d_model, param_dtype=D_TYPE)(jnp.arange(MAX_LEN))
+        x = x + pos_emb
+        for _ in range(self.n_layers):
+            #### 修改注意力机制为可变卷积 ###
+            # print(x.shape) #(16, 64, 128)
+            x = ConvMod(self.d_model, self.n_heads)(x)
+            x = KANBlock()(x)
+        # Shape (batch_size, seq_len, d_model) -> (batch_size, seq_len, vocab_size)
+        x = nn.Dense(features=TOKENIZER_SIZE, use_bias=False, param_dtype=D_TYPE)(x)
+        return x
+```python
+
+训练4h 47m 5s，一半报错 Segmentation fault
 
 
 
