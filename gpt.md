@@ -31,6 +31,7 @@ attn = nn.MultiHeadDotProductAttention(
 )(y,y, mask=mask)
 ```
 运行成功
+
 <img width="912" alt="image" src="https://github.com/user-attachments/assets/17e24bd5-773a-47ab-bb45-22f70fd66c7c">
 
 项目原作者提供的wandb地址：[wandb](https://wandb.ai/cg123/kan-transformer?nw=nwusercg123)
@@ -150,10 +151,13 @@ return x + attn
 要把自注意力机制改成**可变形卷积**
 
 [【卷积参考】](https://www.bilibili.com/video/BV1Sh4y1y75i/?spm_id_from=333.337.search-card.all.click&vd_source=ee28f748a7042b99cf81403720f8106e)
+
 **普通卷积**
+
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/bb610fdc-3316-46d4-81fa-a2379cc7ff1b">
 
 **空洞卷积**
+
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/974c7acd-d13a-45a0-9f0b-59304d71a5e4">
 
 **Depth-wise 卷积**
@@ -173,18 +177,23 @@ Depth-wise 卷积是一种高效的卷积操作，主要用于降低计算复杂
 - 适用于移动设备和资源受限的场景。
  
 **可变形卷积Deformable Convolutional Networks**
+
 <img width="983" alt="image" src="https://github.com/user-attachments/assets/75fa9dbb-5717-45d4-b29c-55667190b89c">
 
 有9个偏移量，每个偏移量有x，y两个参数，所以通道数为18
+
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/771e4853-4d10-4d77-b5bb-1ba54150dddc">
 
 得到亚像素点的位置
+
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/2494608f-936e-4dfb-9d42-7be31c6ecdd9">
 
 亚像素点位置的像素指再和w算卷积结果
+
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/5ae0d34e-f953-43c2-a815-bd104f4d709f">
 
 怎么得到亚像素点位置的像素值-双线性插值
+
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/3599569d-730d-4857-940e-fed0e9ca78a2">
 
 
