@@ -178,7 +178,7 @@ Depth-wise 卷积是一种高效的卷积操作，主要用于降低计算复杂
  
 **可变形卷积Deformable Convolutional Networks**
 
-<img width="983" alt="image" src="https://github.com/user-attachments/assets/75fa9dbb-5717-45d4-b29c-55667190b89c">
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/75fa9dbb-5717-45d4-b29c-55667190b89c">
 
 有9个偏移量，每个偏移量有x，y两个参数，所以通道数为18
 
