@@ -258,7 +258,10 @@ class KANTransformer(nn.Module):
 
 训练4h 47m 5s，一半报错 Segmentation fault
 
-
+## 一些在调研中发现的笔记
+[gpt2code](https://huggingface.co/openai-community/gpt2/tree/main)
+[GPT2 模型 finetuning](https://blog.csdn.net/w776341482/article/details/137911981)
+[GPT2 微调与魔改](https://zhuanlan.zhihu.com/p/699919968?utm_id=0)
 
 
 
