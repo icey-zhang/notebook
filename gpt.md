@@ -7,6 +7,8 @@
 [【Data】](https://huggingface.co/datasets/roneneldan/TinyStories/tree/main)
 
 ## step 1 环境安装
+**设备**: 单独 3090 GPU
+
 python3.8的话只能用optax==0.1.7，不然就会报错betas: tuple[float, float] = (0.9, 0.999), TypeError: 'type' object is not subscriptable
 ```python
 pip install optax==0.1.7 -i  https://pypi.tuna.tsinghua.edu.cn/simple
@@ -26,7 +28,6 @@ TinyStories数据集由GPT-3.5和GPT-4合成生成的短篇故事，这些故事
 - tinystories_all_data.tar.gz - 包含故事的超集，以及创建每个故事时使用的元数据和提示。
 - TinyStoriesV2-GPT4-train.txt - 是基于GPT-4生成的新版本数据集（原数据集中也有GPT-3.5生成的内容，但质量较低）。它包含TinyStories.txt中所有由GPT-4生成的示例作为子集（但规模显著更大）。
 - Evaluation_prompts.yaml: 用于评估我们模型的提示列表（详见论文）。
-
 
 
 ## step 3 运行代码transformer.py
@@ -265,6 +266,20 @@ class KANTransformer(nn.Module):
         x = nn.Dense(features=TOKENIZER_SIZE, use_bias=False, param_dtype=D_TYPE)(x)
         return x
 ```
+
+#### 参数设置
+**参数**:
+- `d_model`: 128
+- `d_mlp`: 768 (when applicable)
+- `n_heads`: 8
+- `n_layers`: 16
+- `learning_rate`: 1e-5
+- `batch_size`: 16
+- `weight_decay`: 0.001
+- `optimizer`: adamw
+- `seq_len`: 64
+- `block_type`: KAN
+
 
 训练4h 47m 5s，一半报错 Segmentation fault
 
