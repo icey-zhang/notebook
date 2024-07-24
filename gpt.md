@@ -147,7 +147,7 @@ return x + attn
 
 - `return x + attn`: 将注意力输出 `attn` 与输入 `x` 相加，实现残差连接，帮助梯度传播并稳定训练。
 
-## 修改代码
+## step 5 修改代码
 要把自注意力机制改成**可变形卷积**
 
 [【卷积参考】](https://www.bilibili.com/video/BV1Sh4y1y75i/?spm_id_from=333.337.search-card.all.click&vd_source=ee28f748a7042b99cf81403720f8106e)
@@ -208,8 +208,8 @@ Depth-wise 卷积是一种高效的卷积操作，主要用于降低计算复杂
 - 提高了模型在处理几何变形上的鲁棒性。
 - 适用于物体检测和分割等需要处理复杂几何变形的任务。
 
-**如何修改？**
-### 定义卷积模块
+### **如何修改？**
+#### 定义卷积模块
 ```python
 class ConvMod(nn.Module):
     dim: int
@@ -233,7 +233,7 @@ class ConvMod(nn.Module):
         return x
 
 ```
-### 替换自注意力机制 
+#### 替换自注意力机制 
 ```python
 class KANTransformer(nn.Module):
     d_model: int
