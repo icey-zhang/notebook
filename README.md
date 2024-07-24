@@ -19,5 +19,3 @@
 4. [ControlNets](https://github.com/icey-zhang/notebook/blob/main/ControlNets.md) | Adding Conditional Control to Text-to-Image Diffusion Models
 5. [YOLO-World](https://github.com/icey-zhang/notebook/blob/main/YOLO-World.md) | YOLO-World: Real-Time Open-Vocabulary Object Detection
 
-项目：
-1. [gpt2](https://github.com/icey-zhang/notebook/blob/main/gpt.md)
