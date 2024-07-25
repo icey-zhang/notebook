@@ -285,11 +285,11 @@ class KANTransformer(nn.Module):
 - `n_heads`: 8
 - `n_layers`: 16
 - `learning_rate`: 1e-5
-- `batch_size`: 16
+- `batch_size`: 512
 - `weight_decay`: 0.001
 - `optimizer`: adamw
 - `seq_len`: 64
-- `block_type`: KAN
+- `block_type`: MLP
 
 
 训练4h 47m 5s，一半报错 Segmentation fault
