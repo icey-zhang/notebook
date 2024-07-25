@@ -290,6 +290,8 @@ class KANTransformer(nn.Module):
 
 [GPT2 微调与魔改](https://zhuanlan.zhihu.com/p/699919968?utm_id=0)
 
+[Conv1d与Conv2d函数用法](https://blog.csdn.net/thy0000/article/details/133586386)
+
 
 
 
