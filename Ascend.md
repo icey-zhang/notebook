@@ -1,4 +1,4 @@
-## 昇腾AI全栈软硬件平台
+![image](https://github.com/user-attachments/assets/e9a0b24f-36f8-4380-9039-76963bd84810)## 昇腾AI全栈软硬件平台
 ### 简述
 昇腾芯片是华为公司发布的两款 AI 处理器(NPU)，**昇腾910（用于训练）和昇腾310（用于推理）处理器**，采用自家的**达芬奇架构**。昇腾在国际上对标的主要是英伟达的GPU，国内对标的包括**寒武纪、海光**等厂商生产的系列AI芯片产品（如：思元590、深算一号等）。
 
@@ -35,8 +35,33 @@ AI框架层主要包括**自研框架MindSpore（昇思）** 和第三方框架�
 应用使能层主要包括ModelZoo、MindX SDK、MindX DL、MindX Edge等。
 
 - ModelZoo： **存放模型的仓库**
+![image](https://github.com/user-attachments/assets/51ccf092-546c-496b-9161-9f2cbe239358)
 
 - MindX SDK： **帮助特定领域的用户快速开发并部署人工智能应用**，比如工业质检、检索聚类等，致力于简化昇腾 AI 处理器推理业务开发过程，降低使用昇腾AI处理器开发的门槛。
 
+![image](https://github.com/user-attachments/assets/49cc2369-968e-482a-b26e-ed702ea96f06)
 
-- 
+
+- MindX DL（昇腾深度学习组件）： 是支持 Atlas训练卡、推理卡的深度学习组件，提供昇腾 AI 处理器集群调度、昇腾 AI 处理器性能测试、模型保护等基础功能，快速使能合作伙伴进行深度学习平台开发。
+
+![image](https://github.com/user-attachments/assets/d8ee6ee5-d023-4186-90ea-847fb535e347)
+
+- MindX Edge（昇腾智能边缘组件）： 提供边缘 AI 业务容器的全生命周期管理能力，同时提供严格的安全可信保障，为客户提供边云协同的边缘计算解决方案，使能客户快速构建边缘 AI 业务。
+
+![image](https://github.com/user-attachments/assets/77539b19-1d90-44e2-9e6f-12bc355280ff)
+
+- Modelarts： ModelArts 是面向开发者的一站式 AI 平台，为机器学习与深度学习提供海量数据预处理及交互式智能标注、大规模分布式训练、自动化模型生成，及端-边-云模型按需部署能力，帮助用户快速创建和部署模型，管理全周期 AI 工作流。
+
+![image](https://github.com/user-attachments/assets/3db27caa-1f76-48e8-ac92-72fa4d93b208)
+
+- HiAI Service：HUAWEI HiAI是面向智能终端的AI能力开放平台，基于 “芯、端、云”三层开放架构，即芯片能力开放、应用能力开放、服务能力开放，构筑全面开放的智慧生态，让开发者能够快速地利用华为强大的AI处理能力，为用户提供更好的智慧应用体验。
+
+  行业应用
+主要应用于能源、金融、交通、电信、制造、医疗等行业，这里就不过多介绍了。
+
+安装 MindSpore 和 MindFormers 简单流程
+建议：确定要安装的MindSpore具体版本，再确定需要安装的驱动和固件版本。
+主要有物理机、容器和虚拟机安装。其中，容器和虚拟机不支持固件包安装。
+
+### 参考
+[GPT2 模型推理](https://zhuanlan.zhihu.com/p/637918406)
