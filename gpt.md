@@ -199,7 +199,7 @@ Depth-wise 卷积是一种高效的卷积操作，主要用于降低计算复杂
 
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/2494608f-936e-4dfb-9d42-7be31c6ecdd9">
 
-亚像素点位置的像素指再和w算卷积结果
+亚像素点位置的像素值再和w算卷积结果
 
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/5ae0d34e-f953-43c2-a815-bd104f4d709f">
 
