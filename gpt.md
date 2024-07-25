@@ -13,6 +13,14 @@ python3.8的话只能用optax==0.1.7，不然就会报错betas: tuple[float, flo
 ```python
 pip install optax==0.1.7 -i  https://pypi.tuna.tsinghua.edu.cn/simple
 ```
+jaxlib的版本 jaxlib-0.4.13+cuda12.cudnn89-cp38-cp38-manylinux2014_x86_64.whl
+jax的版本 0.4.13
+
+查看jax的版本
+```python
+import jax
+jax.devices()
+```
 
 ## step 2 下载数据集
 [【数据集路径】](https://huggingface.co/datasets/roneneldan/TinyStories/tree/main)
