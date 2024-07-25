@@ -21,6 +21,7 @@ jax的版本 0.4.13
 import jax
 jax.devices()
 ```
+cudnn版本 https://developer.nvidia.com/cudnn-downloads
 
 ## step 2 下载数据集
 [【数据集路径】](https://huggingface.co/datasets/roneneldan/TinyStories/tree/main)
