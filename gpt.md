@@ -292,8 +292,6 @@ class KANTransformer(nn.Module):
 - `block_type`: MLP
 
 
-训练4h 47m 5s，一半报错 Segmentation fault
-
 ## 一些在调研中发现的笔记
 [gpt2code](https://huggingface.co/openai-community/gpt2/tree/main)
 
