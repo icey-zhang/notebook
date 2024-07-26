@@ -303,6 +303,8 @@ class KANTransformer(nn.Module):
 
 [Conv1d与Conv2d函数用法](https://blog.csdn.net/thy0000/article/details/133586386)
 
+[什么是 GPT？Transformer 工作原理的动画展示](http://arthurchiao.art/blog/visual-intro-to-transformers-zh/)
+
 
 
 
