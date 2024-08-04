@@ -122,7 +122,7 @@ $$
 如图 4 所示，跨阶段部分层（CSPLayer）在自顶向下或自底向上融合后被利用。我们通过将文本指导纳入多尺度图像特征，扩展了 [20] 的 CSPLayer（也称为 C2f），形成文本引导的 CSPLayer。具体来说，给定文本嵌入 $`W`$ 和图像特征 $`X_l \in \mathbb{R}^{H \times W \times D}`$（$`l \in \{3, 4, 5\}`$），我们在最后一个黑暗瓶颈块之后采用最大-sigmoid 注意力，将文本特征聚合到图像特征中，公式如下：
 
 $$ 
-X'_l = X_l \cdot \delta \left( \max_{j \in \{1..C\}} (X_l W_j^\top) \right)^\top 
+X'l = X_l \cdot \delta \left( \max{j \in {1..C}} (X_l W_j^\top) \right)^\top 
 $$
 
 其中更新后的 $`X'_l`$ 与跨阶段特征连接作为输出。$`\delta`$ 表示 sigmoid 函数。
