@@ -91,7 +91,9 @@ YOLO-World 主要基于 YOLOv8 [20] 开发，包含一个 **Darknet 骨干网络
 
 跟随之前的工作 [20]，我们采用解耦头部，通过两个 3×3 的卷积来回归边界框 $`\{b_k\}_{k=1}^K`$ 和物体嵌入 $`\{e_k\}_{k=1}^K`$，其中 $`K`$ 表示物体的数量。我们提出一个文本对比头，以获得物体-文本相似性 $`s_{k,j}`$，公式如下：
 
-$$ s_{k,j} = \alpha \cdot \text{L2-Norm}(e_k) \cdot \text{L2-Norm}(w_j)^\top + \beta $$
+$$ 
+s_{k,j} = \alpha \cdot \text{L2-Norm}(e_k) \cdot \text{L2-Norm}(w_j)^\top + \beta 
+$$
 
 其中 $`\text{L2-Norm}(\cdot)`$ 是 L2 归一化，$`w_j \in W`$ 是第 $`j`$ 个文本嵌入。此外，我们添加了具有可学习缩放因子 $`\alpha`$ 和偏移因子 $`\beta`$ 的仿射变换。L2 归一化和仿射变换对于稳定区域-文本训练非常重要。
 
@@ -119,7 +121,9 @@ $$ s_{k,j} = \alpha \cdot \text{L2-Norm}(e_k) \cdot \text{L2-Norm}(w_j)^\top + \
 
 如图 4 所示，跨阶段部分层（CSPLayer）在自顶向下或自底向上融合后被利用。我们通过将文本指导纳入多尺度图像特征，扩展了 [20] 的 CSPLayer（也称为 C2f），形成文本引导的 CSPLayer。具体来说，给定文本嵌入 $`W`$ 和图像特征 $`X_l \in \mathbb{R}^{H \times W \times D}`$（$`l \in \{3, 4, 5\}`$），我们在最后一个黑暗瓶颈块之后采用最大-sigmoid 注意力，将文本特征聚合到图像特征中，公式如下：
 
-$$ X'_l = X_l \cdot \delta \left( \max_{j \in \{1..C\}} (X_l W_j^\top) \right)^\top $$
+$$ 
+X'_l = X_l \cdot \delta \left( \max_{j \in \{1..C\}} (X_l W_j^\top) \right)^\top 
+$$
 
 其中更新后的 $`X'_l`$ 与跨阶段特征连接作为输出。$`\delta`$ 表示 sigmoid 函数。
 
