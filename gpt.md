@@ -1,4 +1,4 @@
-参考：[李沐论文精读】GPT、GPT-2和GPT-3论文精读](https://blog.csdn.net/qq_45276194/article/details/136530979)
+参考：[【李沐论文精读】GPT、GPT-2和GPT-3论文精读](https://blog.csdn.net/qq_45276194/article/details/136530979)
 
 # 实践项目 KAN-GPT-2
 <img width="731" alt="image" src="https://github.com/user-attachments/assets/da087340-f21b-4c62-bb49-7be512327a9d">
@@ -290,6 +290,30 @@ class KANTransformer(nn.Module):
 - `optimizer`: adamw
 - `seq_len`: 64
 - `block_type`: MLP
+
+
+#### 实验结论
+
+##### 损失函数
+
+![W B Chart 2024_9_5 17_12_41](https://github.com/user-attachments/assets/73b57c68-aaf0-4b5c-906a-b3c7cf328842)
+
+我们一共整理了三种训练方式的网络，包含：
+1.conv1_ks3 使用卷积核为3的卷积替换自注意力机制
+2.trans 使用gpt2中原始存在的自注意力机制
+3.conv_ks11 使用卷积核为11的卷积替换自注意力机制
+
+结论：损失函数都是可收敛的
+
+##### 实际测试
+
+我们测试了两种情况下gpt的使用情况
+1.trans 使用gpt2中原始存在的自注意力机制
+![image](https://github.com/user-attachments/assets/0ab8417f-80df-4f77-b5c5-1d151e6c1aef)
+2.conv1_ks3 使用卷积核为3的卷积替换自注意力机制
+![image](https://github.com/user-attachments/assets/9667a9a4-6089-4aed-a056-bd3232e47340)
+
+结论：我们发现使用卷积的gpt2并不能很好的回答我们提出的问题，出现了单词的不断重复，这说明卷积的局部关注能力在语言任务需要长序列相关能力的任务中并不适用。同时也验证了自注意力机制在语言任务中的重要性。
 
 
 ## 一些在调研中发现的笔记
