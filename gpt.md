@@ -292,9 +292,9 @@ class KANTransformer(nn.Module):
 - `block_type`: MLP
 
 
-#### 实验结论
+## 实验结论
 
-##### 损失函数
+### 损失函数
 
 ![W B Chart 2024_9_5 17_12_41](https://github.com/user-attachments/assets/73b57c68-aaf0-4b5c-906a-b3c7cf328842)
 
@@ -305,7 +305,7 @@ class KANTransformer(nn.Module):
 
 结论：损失函数都是可收敛的
 
-##### 实际测试
+### 实际测试
 
 我们测试了两种情况下gpt的使用情况
 1.trans 使用gpt2中原始存在的自注意力机制
